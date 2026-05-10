@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Data Primers · Terreiro — Protocolo, Guia Prático e Modelos de Governança e Proteção de Dados dos Terreiros de Candomblé">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soberania dos Conhecimentos do Terreiro: Protocolo e Guia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primario: #9B7040;
+  --primario-escuro: #6B4A20;
+  --primario-claro: #EDE0CC;
+  --sage: #7A9870;
+  --sage-claro: #DDE8D8;
+  --terracota: #C07858;
+  --terracota-claro: #F5E4DA;
+  --areia: #C4A478;
+  --areia-claro: #F5ECD8;
+  --marrom: #8B5E38;
+  --cinza-bg: #FAF7F2;
+  --cinza-borda: #D8CDB8;
+  --cinza-texto: #3A2A18;
+  --cinza-secundario: #7A6848;
+  --branco: #ffffff;
+  --sidebar-w: 280px;
+  --content-max: 820px;
+  --fonte-corpo: 'Source Sans 3', Georgia, serif;
+  --fonte-titulo: 'Crimson Pro', 'Georgia', serif;
+  --fonte-mono: 'Fira Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+ font-family: var(--fonte-corpo);
+ background: #FAF7F2;
+ color: var(--cinza-texto);
+ line-height: 1.7;
+ min-height: 100vh;
+}
+
+/* ── TOP BAR ── */
+#topbar {
+ position: fixed;
+ top: 0; left: 0; right: 0;
+ height: 52px;
+ background: #E8D8C0;
+ display: flex;
+ align-items: center;
+ padding: 0 1.5rem;
+ z-index: 200;
+ gap: 1rem;
+ border-bottom: 2px solid #C4A478;
+}
+
+#topbar .logo {
+ font-family: var(--fonte-titulo);
+ font-size: 1.1rem;
+ color: #ffffff;
+ font-weight: 600;
+ letter-spacing: 0.01em;
+ white-space: nowrap;
+ display: flex;
+ align-items: center;
+ gap: 0.5rem;
+}
+
+#topbar .logo span { color: #8B5E38; }
+
+#topbar .breadcrumb {
+ font-size: 0.8rem;
+ color: rgba(58,42,24,0.5);
+ display: flex;
+ align-items: center;
+ gap: 0.4rem;
+ margin-left: auto;
+}
+#topbar .breadcrumb a { color: rgba(58,42,24,0.75); text-decoration: none; }
+#topbar .breadcrumb a:hover { color: #8B5E38; }
+
+#menu-toggle {
+ display: none;
+ background: none;
+ border: none;
+ cursor: pointer;
+ color: #ffffff;
+ font-size: 1.4rem;
+ padding: 0.25rem;
+ margin-left: auto;
+}
+
+/* ── LAYOUT ── */
+#layout {
+ display: flex;
+ margin-top: 52px;
+ min-height: calc(100vh - 52px);
+}
+
+/* ── SIDEBAR ── */
+#sidebar {
+ width: var(--sidebar-w);
+ min-width: var(--sidebar-w);
+ background: #EDE0CC;
+ position: fixed;
+ top: 52px;
+ bottom: 0;
+ left: 0;
+ overflow-y: auto;
+ overflow-x: hidden;
+ z-index: 100;
+ scrollbar-width: thin;
+ scrollbar-color: #C4A478 #E8D8C0;
+}
+
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-track { background: #E8D8C0; }
+#sidebar::-webkit-scrollbar-thumb { background: #C4A478; border-radius: 2px; }
+
+.sidebar-section {
+ padding: 1rem 0 0.5rem;
+ border-bottom: 1px solid rgba(58,42,24,0.1);
+}
+
+.sidebar-section-title {
+ font-family: var(--fonte-corpo);
+ font-size: 0.65rem;
+ font-weight: 600;
+ letter-spacing: 0.12em;
+ text-transform: uppercase;
+ color: rgba(58,42,24,0.45);
+ padding: 0 1.25rem 0.5rem;
+}
+
+.nav-item {
+ display: block;
+ padding: 0.35rem 1.25rem 0.35rem 1.25rem;
+ font-size: 0.84rem;
+ color: rgba(58,42,24,0.75);
+ text-decoration: none;
+ transition: color 0.15s, background 0.15s;
+ line-height: 1.4;
+ cursor: pointer;
+}
+
+.nav-item:hover { color: #ffffff; background: rgba(255,255,255,0.05); }
+.nav-item.active { color: var(--ouro); font-weight: 600; border-left: 3px solid var(--ouro); padding-left: calc(1.25rem - 3px); background: rgba(184,128,64,0.08); }
+
+.nav-sub {
+ display: block;
+ padding: 0.28rem 1.25rem 0.28rem 2rem;
+ font-size: 0.8rem;
+ color: rgba(58,42,24,0.55);
+ text-decoration: none;
+ transition: color 0.15s;
+ line-height: 1.35;
+}
+.nav-sub:hover { color: #3A2A18; }
+.nav-sub.active { color: #8B5E38; }
+
+.doc-badge {
+ display: inline-block;
+ font-size: 0.65rem;
+ font-weight: 600;
+ padding: 0.1rem 0.4rem;
+ border-radius: 3px;
+ margin-left: 0.4rem;
+ vertical-align: middle;
+ letter-spacing: 0.04em;
+}
+.badge-guia { background: rgba(122,158,112,0.25); color: #4A7840; }
+.badge-proto { background: rgba(192,120,88,0.25); color: #8B4A30; }
+.badge-model { background: rgba(196,164,120,0.3); color: #7A5828; }
+
+.download-btn-side {
+ display: block;
+ margin: 0.6rem 1.25rem;
+ padding: 0.4rem 0.75rem;
+ border: 1px solid rgba(184,128,64,0.4);
+ border-radius: 4px;
+ font-size: 0.78rem;
+ color: var(--ouro);
+ text-decoration: none;
+ text-align: center;
+ transition: all 0.15s;
+ background: rgba(184,128,64,0.07);
+}
+.download-btn-side:hover { background: rgba(184,128,64,0.18); border-color: var(--ouro); }
+
+/* ── MAIN CONTENT ── */
+#main {
+ margin-left: var(--sidebar-w);
+ flex: 1;
+ min-width: 0;
+ background: #ffffff;
+}
+
+.content-wrap {
+ max-width: var(--content-max);
+ margin: 0 auto;
+ padding: 2.5rem 3rem 4rem;
+}
+
+/* ── SECTION PAGES ── */
+.doc-page { display: none; }
+.doc-page.active { display: block; }
+
+/* ── HERO ── */
+.hero {
+ background: linear-gradient(135deg, #D4B896 0%, #C4A47A 50%, #B89060 100%);
+ color: #ffffff;
+ padding: 3rem 3rem 2.5rem;
+ position: relative;
+ overflow: hidden;
+}
+.hero::before {
+ content: '';
+ position: absolute; inset: 0;
+ background: radial-gradient(ellipse at 80% 50%, rgba(200,146,74,0.2) 0%, transparent 60%);
+}
+.hero-tag {
+ font-size: 0.7rem;
+ letter-spacing: 0.14em;
+ text-transform: uppercase;
+ color: rgba(184,128,64,0.9);
+ font-weight: 600;
+ margin-bottom: 0.75rem;
+ font-family: var(--fonte-corpo);
+}
+.hero h1 {
+ font-family: var(--fonte-titulo);
+ font-size: 2.2rem;
+ line-height: 1.2;
+ font-weight: 600;
+ color: #ffffff;
+ margin-bottom: 0.75rem;
+ position: relative;
+}
+.hero h1 em { color: #5A3010; font-style: normal; }
+.hero p {
+ font-size: 1rem;
+ color: rgba(253,246,227,0.78);
+ max-width: 560px;
+ line-height: 1.65;
+ position: relative;
+ margin-bottom: 1.5rem;
+}
+.hero-cards {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 1rem;
+ position: relative;
+ margin-top: 0.5rem;
+}
+.hero-card {
+ background: rgba(255,255,255,0.06);
+ border: 1px solid rgba(253,246,227,0.12);
+ border-radius: 8px;
+ padding: 1rem 1.1rem;
+ cursor: pointer;
+ transition: all 0.2s;
+ text-decoration: none;
+ display: block;
+}
+.hero-card:hover { background: rgba(255,255,255,0.55); border-color: #8B5E38; transform: translateY(-2px); }
+.hero-card .card-icon { font-size: 1.5rem; margin-bottom: 0.4rem; }
+.hero-card .card-title { font-weight: 600; font-size: 0.9rem; color: #ffffff; margin-bottom: 0.2rem; }
+.hero-card .card-desc { font-size: 0.78rem; color: rgba(42,20,8,0.6); line-height: 1.4; }
+.hero-card .card-tag { display: inline-block; font-size: 0.65rem; font-weight: 600; padding: 0.1rem 0.45rem; border-radius: 3px; margin-top: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.tag-g { background: rgba(122,74,30,0.5); color: #F0C878; }
+.tag-p { background: rgba(107,48,16,0.5); color: #E8C088; }
+.tag-m { background: rgba(90,48,16,0.5); color: #D4A868; }
+
+/* ── CONTENT TYPOGRAPHY ── */
+.content-wrap h1 {
+ font-family: var(--fonte-titulo);
+ font-size: 2rem;
+ font-weight: 600;
+ color: #4A2E10;
+ margin: 2rem 0 0.5rem;
+ padding-bottom: 0.5rem;
+ border-bottom: 2px solid #D4B890;
+ line-height: 1.25;
+}
+.content-wrap h2 {
+ font-family: var(--fonte-titulo);
+ font-size: 1.45rem;
+ font-weight: 600;
+ color: #A06040;
+ margin: 2rem 0 0.5rem;
+ line-height: 1.3;
+}
+.content-wrap h3 {
+ font-family: var(--fonte-corpo);
+ font-size: 1.05rem;
+ font-weight: 600;
+ color: #5A7848;
+ margin: 1.5rem 0 0.4rem;
+}
+.content-wrap p { margin-bottom: 0.85rem; font-size: 0.97rem; }
+.content-wrap ul, .content-wrap ol { margin: 0.5rem 0 0.85rem 1.5rem; }
+.content-wrap li { margin-bottom: 0.35rem; font-size: 0.95rem; line-height: 1.65; }
+
+.anchor-link {
+ color: var(--cinza-borda);
+ text-decoration: none;
+ margin-left: 0.4rem;
+ font-size: 0.8em;
+ opacity: 0;
+ transition: opacity 0.15s;
+}
+.content-wrap h1:hover .anchor-link,
+.content-wrap h2:hover .anchor-link { opacity: 1; }
+
+/* ── CALLOUT BOXES ── */
+.box {
+ border-radius: 6px;
+ padding: 1rem 1.2rem;
+ margin: 1rem 0 1.2rem;
+ border-left: 4px solid;
+ font-size: 0.93rem;
+}
+.box-title {
+ font-weight: 600;
+ font-size: 0.82rem;
+ letter-spacing: 0.06em;
+ text-transform: uppercase;
+ margin-bottom: 0.5rem;
+}
+.box.verde { background: #F0EBE0; border-color: #7A4A1E; }
+.box.verde .box-title { color: #3A2010; }
+.box.ouro { background: #ffffff; border-color: #B88040; }
+.box.ouro .box-title { color: #7A4A10; }
+.box.terracota { background: #FAE8E0; border-color: #8B3010; }
+.box.terracota .box-title { color: #6B2008; }
+.box.azul { background: #E4EDD8; border-color: #4A6840; }
+.box.azul .box-title { color: #2E4820; }
+.box.roxo { background: #F5EDE4; border-color: #6B3818; }
+.box.roxo .box-title { color: #5A2A08; }
+
+/* ── TABLES ── */
+.table-wrap { overflow-x: auto; margin: 1rem 0 1.2rem; }
+table {
+ width: 100%;
+ border-collapse: collapse;
+ font-size: 0.88rem;
+}
+thead tr { background: var(--verde-escuro); color: #ffffff; }
+thead th { padding: 0.65rem 0.9rem; text-align: left; font-weight: 600; font-size: 0.82rem; letter-spacing: 0.03em; color: #3A2010; }
+tbody tr:nth-child(even) { background: #ffffff; }
+tbody tr:hover { background: #F0E8D8; }
+tbody td { padding: 0.6rem 0.9rem; border-bottom: 1px solid #DDD0B8; vertical-align: top; line-height: 1.5; }
+
+/* ── BADGE LEVELS ── */
+.badge {
+ display: inline-block;
+ font-size: 0.72rem;
+ font-weight: 600;
+ padding: 0.15rem 0.55rem;
+ border-radius: 999px;
+ letter-spacing: 0.04em;
+ white-space: nowrap;
+}
+.b-pub { background: #dcf5e7; color: #7A3A10; }
+.b-com { background: #dce9f9; color: #4A5A28; }
+.b-res { background: #fdf3d3; color: #6B3A10; }
+.b-sag { background: #fde9e4; color: #6A1A0A; }
+.b-sec { background: #201008; color: #D4B888; }
+
+/* ── CHECKLIST ── */
+.checklist {
+ list-style: none;
+ margin: 0.5rem 0 1rem;
+ padding: 0;
+ background: var(--verde-claro);
+ border-radius: 6px;
+ padding: 0.75rem 1.1rem;
+ border: 1px solid rgba(122,74,30,0.2);
+}
+.checklist li {
+ padding: 0.3rem 0;
+ padding-left: 1.6rem;
+ position: relative;
+ font-size: 0.93rem;
+ border-bottom: 1px solid rgba(122,74,30,0.1);
+}
+.checklist li:last-child { border-bottom: none; }
+.checklist li::before {
+ content: '[ ]';
+ position: absolute; left: 0;
+ color: #7A9870;
+ font-size: 1rem;
+}
+
+/* ── TEMPLATE CARDS ── */
+.template-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+ gap: 1rem;
+ margin: 1rem 0 1.5rem;
+}
+.template-card {
+ background: #ffffff;
+ border: 1px solid var(--cinza-borda);
+ border-radius: 8px;
+ padding: 1.1rem;
+ transition: all 0.2s;
+ cursor: pointer;
+}
+.template-card:hover { border-color: #7A9870; box-shadow: 0 2px 10px rgba(122,74,30,0.12); transform: translateY(-2px); }
+.template-card .t-icon { font-size: 1.6rem; margin-bottom: 0.5rem; }
+.template-card .t-title { font-weight: 600; font-size: 0.9rem; color: #5A3A18; margin-bottom: 0.25rem; }
+.template-card .t-desc { font-size: 0.8rem; color: var(--cinza-secundario); line-height: 1.4; }
+
+/* ── STEP BLOCKS ── */
+.steps { margin: 1rem 0; }
+.step {
+ display: flex;
+ gap: 1rem;
+ margin-bottom: 1.25rem;
+ align-items: flex-start;
+}
+.step-num {
+ min-width: 36px;
+ height: 36px;
+ background: var(--verde-escuro);
+ color: var(--ouro);
+ border-radius: 50%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-weight: 600;
+ font-size: 0.9rem;
+ font-family: var(--fonte-mono);
+ flex-shrink: 0;
+}
+.step-body { flex: 1; }
+.step-body strong { display: block; font-size: 0.95rem; color: #4A2E10; margin-bottom: 0.2rem; }
+.step-body p { font-size: 0.9rem; color: var(--cinza-texto); margin: 0; }
+
+/* ── FORM TEMPLATES ── */
+.form-template {
+ background: #ffffff;
+ border: 1.5px dashed #C8B898;
+ border-radius: 6px;
+ padding: 1.2rem 1.4rem;
+ margin: 0.75rem 0 1.2rem;
+ font-family: var(--fonte-mono);
+ font-size: 0.82rem;
+ line-height: 1.8;
+ color: var(--cinza-texto);
+ white-space: pre-wrap;
+}
+.form-template .field { color: #5A7848; font-style: italic; }
+.form-template .label { color: #5A3A18; font-weight: 500; }
+
+/* ── DOWNLOAD BAR ── */
+.download-bar {
+ background: #ffffff;
+ border: 1px solid rgba(184,128,64,0.3);
+ border-radius: 8px;
+ padding: 1rem 1.25rem;
+ margin: 1.5rem 0;
+ display: flex;
+ align-items: center;
+ gap: 1rem;
+ flex-wrap: wrap;
+}
+.download-bar .dl-icon { font-size: 1.5rem; }
+.download-bar .dl-text { flex: 1; min-width: 180px; }
+.download-bar .dl-text strong { display: block; font-size: 0.9rem; color: #5A3A10; }
+.download-bar .dl-text span { font-size: 0.8rem; color: var(--cinza-secundario); }
+.dl-btn {
+ display: inline-flex;
+ align-items: center;
+ gap: 0.4rem;
+ background: var(--ouro);
+ color: #2a1800;
+ padding: 0.5rem 1.1rem;
+ border-radius: 5px;
+ text-decoration: none;
+ font-size: 0.85rem;
+ font-weight: 600;
+ transition: all 0.15s;
+ white-space: nowrap;
+}
+.dl-btn:hover { background: #B89060; }
+
+/* ── TOC INLINE ── */
+.toc {
+ background: #ffffff;
+ border: 1px solid var(--cinza-borda);
+ border-radius: 6px;
+ padding: 1rem 1.25rem;
+ margin-bottom: 2rem;
+ font-size: 0.85rem;
+}
+.toc-title { font-weight: 600; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: #8A6040; margin-bottom: 0.5rem; }
+.toc ol { margin: 0; padding-left: 1.25rem; column-count: 2; column-gap: 1.5rem; }
+.toc li { margin-bottom: 0.25rem; line-height: 1.4; }
+.toc a { color: #6B4A20; text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+
+/* ── LEVEL TABLE ── */
+.level-table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1.2rem; }
+.level-row td { padding: 0.6rem 0.85rem; border-bottom: 1px solid #DDD0B8; font-size: 0.88rem; vertical-align: top; }
+.level-row:last-child td { border-bottom: none; }
+.level-dot { width: 14px; height: 14px; border-radius: 50%; display: inline-block; margin-right: 6px; vertical-align: middle; }
+.dot-g { background: #8B4A1A; }
+.dot-b { background: #90A8C8; }
+.dot-y { background: #B88040; }
+.dot-r { background: #C07858; }
+.dot-k { background: #8A7060; }
+
+/* ── PAGE HEADER STRIP ── */
+.page-header {
+ padding: 1.5rem 3rem 1rem;
+ border-bottom: 1px solid #DDD0B8;
+ background: #ffffff;
+}
+.page-header .ph-tag {
+ font-size: 0.7rem;
+ letter-spacing: 0.12em;
+ text-transform: uppercase;
+ font-weight: 600;
+ margin-bottom: 0.3rem;
+}
+.ph-tag.g { color: #6A8858; }
+.ph-tag.p { color: #A06040; }
+.ph-tag.m { color: #8A6840; }
+.page-header h1 { font-family: var(--fonte-titulo); font-size: 1.7rem; color: #4A2E10; font-weight: 600; border: none; padding: 0; margin: 0; }
+
+/* ── SEARCH BAR ── */
+#search-wrap { padding: 0.75rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+#search {
+ width: 100%;
+ background: rgba(255,255,255,0.6);
+ border: 1px solid rgba(58,42,24,0.2);
+ border-radius: 4px;
+ padding: 0.4rem 0.75rem;
+ font-size: 0.82rem;
+ color: #ffffff;
+ outline: none;
+ font-family: var(--fonte-corpo);
+}
+#search::placeholder { color: rgba(58,42,24,0.45); }
+#search:focus { border-color: #B89060; background: rgba(255,255,255,0.9); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+ :root { --sidebar-w: 0px; }
+ #sidebar { transform: translateX(-280px); width: 280px; min-width: 280px; transition: transform 0.25s; }
+ #sidebar.open { transform: translateX(0); }
+ #main { margin-left: 0; }
+ #menu-toggle { display: block; }
+ .content-wrap { padding: 1.5rem 1.25rem 3rem; }
+ .hero { padding: 2rem 1.25rem 1.5rem; }
+ .hero-cards { grid-template-columns: 1fr; }
+ .hero h1 { font-size: 1.6rem; }
+ .page-header { padding: 1rem 1.25rem; }
+ .toc ol { column-count: 1; }
+}
+
+/* ── SITE FOOTER ── */
+#site-footer {
+  margin-left: var(--sidebar-w);
+  background: #ffffff;
+  border-top: 1px solid #E8DDD0;
+  padding: 1.1rem 3rem;
+  text-align: center;
+}
+#site-footer p {
+  margin: 0;
+  font-family: 'Source Sans 3', Georgia, serif;
+  font-size: 0.8rem;
+  color: #8A6848;
+  line-height: 1.6;
+}
+#site-footer .footer-brand {
+  font-weight: 600;
+  color: #5A3A18;
+}
+#site-footer .footer-sub {
+  font-style: italic;
+  color: #B09878;
+  font-size: 0.75rem;
+}
+@media (max-width: 900px) {
+  #site-footer { margin-left: 0; padding: 1rem 1.25rem; }
+}
+</style>
+</head>
+<body>
+<!-- TOP BAR -->
+<header id="topbar">
+<div class="logo"><span>Terreiro</span> · Soberania dos Conhecimentos</div>
+<nav class="breadcrumb" id="breadcrumb">
+<a href="#" onclick="showPage('home')">Início</a>
+<span>></span>
+<span id="bc-current">Página inicial</span>
+</nav>
+<button id="menu-toggle" aria-label="Menu" onclick="toggleSidebar()"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect y="3" width="20" height="2" rx="1" fill="currentColor"/><rect y="9" width="20" height="2" rx="1" fill="currentColor"/><rect y="15" width="20" height="2" rx="1" fill="currentColor"/></svg></button>
+</header>
+<!-- LAYOUT -->
+<div id="layout">
+<!-- SIDEBAR -->
+<nav id="sidebar">
+<div id="search-wrap">
+<input id="search" type="search" placeholder="Buscar no documento…" oninput="filterNav(this.value)" autocomplete="off">
+</div>
+<!-- HOME -->
+<div class="sidebar-section">
+<div class="sidebar-section-title">Portal</div>
+<a class="nav-item active" onclick="showPage('home')" id="nav-home">Início</a>
+<a class="nav-item" onclick="showPage('sobre')" id="nav-sobre">Sobre este projeto</a>
+</div>
+<!-- GUIA -->
+<div class="sidebar-section">
+<div class="sidebar-section-title">Guia Prático</div>
+<a class="nav-item" onclick="showPage('guia')" id="nav-guia">Guia Comunitário <span class="doc-badge badge-guia">NOVO</span></a>
+<a class="nav-sub" onclick="showPage('guia'); scrollTo('g-por-que')">> Por que proteger?</a>
+<a class="nav-sub" onclick="showPage('guia'); scrollTo('g-conceitos')">> Conceitos simples</a>
+<a class="nav-sub" onclick="showPage('guia'); scrollTo('g-p1')">> Passo 1: Conversar</a>
+<a class="nav-sub" onclick="showPage('guia'); scrollTo('g-p2')">> Passo 2: Grupo</a>
+<a class="nav-sub" onclick="showPage('guia'); scrollTo('g-p3')">> Passo 3: Inventário</a>
+<a class="nav-sub" onclick="showPage('guia'); scrollTo('g-p4')">> Passo 4: Classificar</a>
+<a class="nav-sub" onclick="showPage('guia'); scrollTo('g-p5')">> Passo 5: Autorização</a>
+<a class="nav-sub" onclick="showPage('guia'); scrollTo('g-p6')">> Passo 6: Organizar</a>
+<a class="nav-sub" onclick="showPage('guia'); scrollTo('g-p7')">> Passo 7: Sagrado</a>
+<a class="nav-sub" onclick="showPage('guia'); scrollTo('g-p8')">> Passo 8: Pesquisadores</a>
+<a class="nav-sub" onclick="showPage('guia'); scrollTo('g-p9')">> Passo 9: Memória</a>
+<a class="nav-sub" onclick="showPage('guia'); scrollTo('g-p10')">> Passo 10: Revisar</a>
+<a class="nav-sub" onclick="showPage('guia'); scrollTo('g-ia')">> Cuidados com IA</a>
+<a class="download-btn-side" href="Guia_Pratico_Protecao_Terreiro_v1.docx" download>Baixar guia (.docx)</a>
+</div>
+<!-- PROTOCOLO -->
+<div class="sidebar-section">
+<div class="sidebar-section-title">Protocolo Técnico</div>
+<a class="nav-item" onclick="showPage('proto')" id="nav-proto">Protocolo Institucional</a>
+<a class="nav-sub" onclick="showPage('proto'); scrollTo('p-lacunas')">> Lacunas identificadas</a>
+<a class="nav-sub" onclick="showPage('proto'); scrollTo('p-principios')">> Princípios norteadores</a>
+<a class="nav-sub" onclick="showPage('proto'); scrollTo('p-juridico')">> Fundamentação jurídica</a>
+<a class="nav-sub" onclick="showPage('proto'); scrollTo('p-classificacao')">> Classificação dos dados</a>
+<a class="nav-sub" onclick="showPage('proto'); scrollTo('p-governanca')">> Governança comunitária</a>
+<a class="nav-sub" onclick="showPage('proto'); scrollTo('p-consentimento')">> Consentimento CLPI</a>
+<a class="nav-sub" onclick="showPage('proto'); scrollTo('p-seguranca')">> Segurança da informação</a>
+<a class="nav-sub" onclick="showPage('proto'); scrollTo('p-riscos')">> Matriz de riscos</a>
+<a class="nav-sub" onclick="showPage('proto'); scrollTo('p-raci')">> Matriz RACI</a>
+<a class="nav-sub" onclick="showPage('proto'); scrollTo('p-indicadores')">> Indicadores e auditoria</a>
+<a class="download-btn-side" href="Protocolo_Candomble_Dados_v1.docx" download>Baixar protocolo (.docx)</a>
+</div>
+<!-- MODELOS -->
+<div class="sidebar-section">
+<div class="sidebar-section-title">Modelos e Templates</div>
+<a class="nav-item" onclick="showPage('modelos')" id="nav-modelos">Modelos prontos</a>
+<a class="nav-sub" onclick="showPage('modelos'); scrollTo('m-consentimento')">> Consentimento comunitário</a>
+<a class="nav-sub" onclick="showPage('modelos'); scrollTo('m-imagem')">> Autorização de imagem</a>
+<a class="nav-sub" onclick="showPage('modelos'); scrollTo('m-pesquisador')">> Termo para pesquisador</a>
+<a class="nav-sub" onclick="showPage('modelos'); scrollTo('m-inventario')">> Ficha de inventário</a>
+<a class="nav-sub" onclick="showPage('modelos'); scrollTo('m-catalogacao')">> Ficha de catalogação</a>
+<a class="nav-sub" onclick="showPage('modelos'); scrollTo('m-incidente')">> Protocolo de incidente</a>
+<a class="nav-sub" onclick="showPage('modelos'); scrollTo('m-etiquetas')">> Etiquetas TK/BC</a>
+<a class="nav-sub" onclick="showPage('modelos'); scrollTo('m-raci')">> Matriz RACI</a>
+<a class="nav-sub" onclick="showPage('modelos'); scrollTo('m-checklists')">> Checklists prontos</a>
+</div>
+<div style="height: 2rem;"></div>
+</nav><!-- /sidebar -->
+<!-- MAIN -->
+<main id="main">
+<!-- ========== HOME ========== -->
+<div class="doc-page active" id="page-home">
+<div class="hero">
+<div class="hero-tag">Data Primers · Terreiro &nbsp;|&nbsp; Governança e Proteção de Dados</div>
+<h1>Soberania dos Conhecimentos<br>do <em>Terreiro</em></h1>
+<p>Protocolo técnico-institucional e guia prático para proteção, curadoria e governança dos dados e conhecimentos tradicionais dos terreiros de Candomblé.</p>
+<div class="hero-cards">
+<a class="hero-card" onclick="showPage('guia')">
+<div class="card-icon">Guia </div>
+<div class="card-title">Guia Comunitário</div>
+<div class="card-desc">Linguagem acessível, passo a passo, checklists e modelos prontos para qualquer terreiro.</div>
+<div class="card-tag tag-g">Comunitário</div>
+</a>
+<a class="hero-card" onclick="showPage('proto')">
+<div class="card-icon">Protocolo </div>
+<div class="card-title">Protocolo Técnico</div>
+<div class="card-desc">Documento institucional completo com fundamentação jurídica, governança e matrizes.</div>
+<div class="card-tag tag-p">Institucional</div>
+</a>
+<a class="hero-card" onclick="showPage('modelos')">
+<div class="card-icon">Modelos </div>
+<div class="card-title">Modelos e Templates</div>
+<div class="card-desc">Termos, autorizações, fichas, checklists e formulários prontos para usar.</div>
+<div class="card-tag tag-m">Templates</div>
+</a>
+</div>
+</div>
+<div class="content-wrap">
+<h2>Sobre este portal</h2>
+<p>Este portal reúne dois documentos complementares e um conjunto de modelos operacionais desenvolvidos para apoiar comunidades de terreiro na proteção, curadoria e governança soberana de seus dados e conhecimentos tradicionais.</p>
+<p>O projeto reconhece os terreiros de Candomblé como <strong>instituições legítimas de produção de conhecimento</strong>, com o direito inalienável de decidir o que pode ou não ser acessado, registrado, compartilhado ou publicado sobre sua vida religiosa, cultural e comunitária.</p>
+<div class="box verde">
+<div class="box-title">Como usar este portal</div>
+<p>Se você é liderança ou membro de terreiro: comece pelo <strong>Guia Comunitário</strong>: ele foi escrito para você, em linguagem simples, com exemplos do cotidiano.</p>
+<p>Se você é pesquisador, gestor ou técnico: o <strong>Protocolo Técnico</strong> traz a fundamentação jurídica, as matrizes e os mecanismos formais de governança.</p>
+<p>Os <strong>Modelos e Templates</strong> estão prontos para impressão ou digitalização e podem ser adaptados à realidade de cada terreiro.</p>
+</div>
+<h2>Princípios que orientam este trabalho</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Princípio</th><th>O que significa</th></tr></thead>
+<tbody>
+<tr><td><strong>Soberania comunitária</strong></td><td>O terreiro decide o que acontece com seus dados. Nenhuma instituição externa tem autoridade sobre esses conhecimentos.</td></tr>
+<tr><td><strong>Consentimento CLPI</strong></td><td>Livre, prévio e informado. A comunidade autoriza antes de qualquer acesso, com plena compreensão.</td></tr>
+<tr><td><strong>Não extração epistêmica</strong></td><td>Proibido extrair conhecimentos do terreiro sem retorno efetivo e parceria genuína com a comunidade.</td></tr>
+<tr><td><strong>Proteção antirracista</strong></td><td>Os dados dos terreiros não podem ser usados para estigmatizar, criminalizar ou discriminar as comunidades.</td></tr>
+<tr><td><strong>Salvaguarda intergeracional</strong></td><td>Os conhecimentos devem ser preservados para as futuras gerações, com integridade cultural.</td></tr>
+<tr><td><strong>Proteção contra IA</strong></td><td>Vedado o uso de qualquer dado do terreiro para treinar sistemas de Inteligência Artificial sem autorização explícita.</td></tr>
+</tbody>
+</table>
+</div>
+<h2>Referências internacionais</h2>
+<p>Este trabalho articula experiências e frameworks de:</p>
+<div class="template-grid">
+<div class="template-card"><div class="t-icon"></div><div class="t-title">Princípios CARE</div><div class="t-desc">Benefício Coletivo, Autoridade para Controlar, Responsabilidade, Ética: GIDA, 2019</div></div>
+<div class="template-card"><div class="t-icon"></div><div class="t-title">TK/BC Labels</div><div class="t-desc">Etiquetas de Conhecimento Tradicional e Biocultural: Local Contexts</div></div>
+<div class="template-card"><div class="t-icon"></div><div class="t-title">OCAP®</div><div class="t-desc">Propriedade, Controle, Acesso e Posse: First Nations, Canadá</div></div>
+<div class="template-card"><div class="t-icon"></div><div class="t-title">Ngā Tikanga Paiherea</div><div class="t-desc">Protocolo maori de soberania de dados: Nova Zelândia</div></div>
+<div class="template-card"><div class="t-icon"></div><div class="t-title">Protocolo Karuk</div><div class="t-desc">Direitos de Propriedade Intelectual: Tribo Karuk, EUA</div></div>
+<div class="template-card"><div class="t-icon"></div><div class="t-title">OMPI / UNESCO</div><div class="t-desc">Proteção de conhecimentos tradicionais e patrimônio cultural imaterial</div></div>
+</div>
+<div class="download-bar">
+<div class="dl-icon"></div>
+<div class="dl-text"><strong>Baixar documentos completos</strong><span>Versão 1.0 | 2025 | Licença CC BY-NC-SA 4.0</span></div>
+<a class="dl-btn" href="Guia_Pratico_Protecao_Terreiro_v1.docx" download>Guia (.docx)</a>
+<a class="dl-btn" href="Protocolo_Candomble_Dados_v1.docx" download>Protocolo (.docx)</a>
+</div>
+</div>
+</div><!-- /home -->
+<!-- ========== GUIA ========== -->
+<div class="doc-page" id="page-guia">
+<div class="page-header">
+<div class="ph-tag g">Guia Comunitário</div>
+<h1>Guia Prático de Proteção, Memória e Soberania dos Conhecimentos do Terreiro</h1>
+</div>
+<div class="content-wrap">
+<div class="download-bar">
+<div class="dl-icon">Guia </div>
+<div class="dl-text"><strong>Guia Prático: Versão 1.0 | 2025</strong><span>Para comunidades de terreiro, lideranças religiosas e guardiões de conhecimento</span></div>
+<a class="dl-btn" href="Guia_Pratico_Protecao_Terreiro_v1.docx" download>Baixar (.docx)</a>
+</div>
+<div class="toc">
+<div class="toc-title">Neste guia</div>
+<ol>
+<li><a onclick="scrollTo('g-por-que')">Por que proteger?</a></li>
+<li><a onclick="scrollTo('g-conceitos')">Conceitos simples</a></li>
+<li><a onclick="scrollTo('g-p1')">Passo 1: Conversar</a></li>
+<li><a onclick="scrollTo('g-p2')">Passo 2: Grupo responsável</a></li>
+<li><a onclick="scrollTo('g-p3')">Passo 3: Inventário</a></li>
+<li><a onclick="scrollTo('g-p4')">Passo 4: Classificar</a></li>
+<li><a onclick="scrollTo('g-p5')">Passo 5: Autorização</a></li>
+<li><a onclick="scrollTo('g-p6')">Passo 6: Organizar</a></li>
+<li><a onclick="scrollTo('g-p7')">Passo 7: Sagrado</a></li>
+<li><a onclick="scrollTo('g-p8')">Passo 8: Pesquisadores</a></li>
+<li><a onclick="scrollTo('g-p9')">Passo 9: Memória</a></li>
+<li><a onclick="scrollTo('g-p10')">Passo 10: Revisar</a></li>
+<li><a onclick="scrollTo('g-ia')">Cuidados com IA</a></li>
+</ol>
+</div>
+<h1 id="g-por-que">Por que proteger os conhecimentos do terreiro? <a class="anchor-link" href="#g-por-que">¶</a></h1>
+<p>O terreiro é muito mais do que um espaço religioso. É um lugar de memória, de cura, de aprendizado, de resistência, de pertencimento. Dentro do terreiro vivem histórias, cantigas, rezas, receitas, segredos, plantações, rituais: saberes construídos ao longo de gerações e gerações.</p>
+<p>Esses conhecimentos pertencem à comunidade. Não foram escritos em livros de editoras famosas. Não têm registro em cartório. Mas são reais, valiosos e sagrados. E é exatamente por isso que precisam de proteção.</p>
+<div class="box terracota">
+<div class="box-title">O que pode acontecer sem proteção</div>
+<ul>
+<li>Um pesquisador pode gravar uma cantiga sagrada e publicar em um livro sem pedir autorização.</li>
+<li>Uma empresa pode usar receitas medicinais do terreiro para criar produtos registrando como seu.</li>
+<li>Imagens de rituais podem aparecer em sites ou reportagens de forma errada e desrespeitosa.</li>
+<li>Sistemas de IA podem "aprender" com cantigas e imagens do terreiro sem respeito ou permissão.</li>
+<li>Memórias importantes podem ser perdidas quando anciãos partem sem que nada tenha sido registrado.</li>
+</ul>
+</div>
+<div class="box azul">
+<div class="box-title">Exemplo real</div>
+<p>A Mãe Conceição tem um barracão de Angola há 60 anos. Um estudante pediu para fazer uma pesquisa sobre ervas medicinais. Ela aceitou. Dois anos depois, ele publicou um livro com as receitas: sem citar o terreiro, sem pedir permissão para publicar. Com um protocolo de proteção, o terreiro teria um termo de autorização assinado com a exigência de citar a comunidade e entregar cópia do livro.</p>
+</div>
+<h1 id="g-conceitos">Entendendo as palavras importantes <a class="anchor-link" href="#g-conceitos">¶</a></h1>
+<div class="table-wrap">
+<table>
+<thead><tr><th style="width:28%">Palavra</th><th>O que significa na prática</th></tr></thead>
+<tbody>
+<tr><td><strong>Dados</strong></td><td>Tudo que pode ser registrado sobre o terreiro: fotos, vídeos, áudios, receitas, mapas, listas de membros. São os "registros" da comunidade.</td></tr>
+<tr><td><strong>Conhecimentos tradicionais</strong></td><td>Os saberes que o terreiro carrega: como usar as ervas, as cantigas de cada orisá, as receitas de comida de santo. São criações coletivas transmitidas ao longo do tempo.</td></tr>
+<tr><td><strong>Dados sagrados</strong></td><td>Conhecimentos de caráter espiritual que não devem ser acessados por quem não tem grau de iniciação ou autorização específica.</td></tr>
+<tr><td><strong>Consentimento</strong></td><td>A autorização que alguém dá para que seus dados ou imagem sejam usados. Deve ser livre (sem pressão), anterior ao uso e a pessoa precisa entender o que está autorizando.</td></tr>
+<tr><td><strong>Soberania de dados</strong></td><td>O direito da comunidade de decidir o que acontece com suas informações e conhecimentos: sem precisar pedir permissão para ninguém de fora.</td></tr>
+<tr><td><strong>Curadoria</strong></td><td>O trabalho de organizar, classificar, cuidar e preservar os conhecimentos e materiais do terreiro com intenção e critério cultural.</td></tr>
+</tbody>
+</table>
+</div>
+<h1 id="g-p1">Passo 1: Conversar com a comunidade <a class="anchor-link" href="#g-p1">¶</a></h1>
+<p>Antes de qualquer lista, regra ou formulário, o primeiro passo é reunir a comunidade. Nenhuma decisão sobre o que proteger deve ser tomada por uma pessoa só.</p>
+<div class="box roxo">
+<div class="box-title">Perguntas para guiar a conversa</div>
+<ul>
+<li>O que do nosso terreiro não queremos que ninguém de fora conheça?</li>
+<li>Existem cantigas, receitas ou práticas que são só para quem é da casa?</li>
+<li>Já vivemos alguma situação em que alguém usou algo do terreiro sem autorização?</li>
+<li>Que memórias importantes corremos o risco de perder?</li>
+<li>O que podemos compartilhar com o público geral sem problema?</li>
+</ul>
+</div>
+<ul class="checklist">
+<li>A liderança do terreiro foi consultada e aprovou a reunião</li>
+<li>Todos puderam falar: não só os mais velhos ou só as lideranças</li>
+<li>As preocupações da comunidade foram anotadas ou gravadas (com permissão)</li>
+<li>Ficou claro que nada será feito sem aprovação coletiva</li>
+<li>Foram identificados os próximos passos</li>
+</ul>
+<h1 id="g-p2">Passo 2: Criar o grupo responsável <a class="anchor-link" href="#g-p2">¶</a></h1>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Função</th><th>O que faz</th><th>Quem pode ser</th></tr></thead>
+<tbody>
+<tr><td><strong>Coordenador(a) da Memória</strong></td><td>Organiza reuniões do grupo e faz a ponte com a liderança</td><td>Membro de confiança, com boa comunicação</td></tr>
+<tr><td><strong>Guardião/Guardiã de Conhecimento</strong></td><td>Define o que pode ou não ser acessado em cada área</td><td>Liderança religiosa ou membro indicado por ela</td></tr>
+<tr><td><strong>Responsável pela Organização</strong></td><td>Cuida da organização das pastas, fotos e documentos</td><td>Membro com disposição para organização</td></tr>
+<tr><td><strong>Responsável pela Tecnologia</strong></td><td>Cuida do armazenamento digital, senhas e backup</td><td>Membro com familiaridade com celular/computador</td></tr>
+<tr><td><strong>Responsável pelas Autorizações</strong></td><td>Cuida dos formulários e guarda os termos assinados</td><td>Membro organizado e de confiança</td></tr>
+</tbody>
+</table>
+</div>
+<h1 id="g-p3">Passo 3: Listar o que o terreiro quer proteger <a class="anchor-link" href="#g-p3">¶</a></h1>
+<p>Faça o inventário: liste o que o terreiro tem. Não precisa ser algo complicado. É responder à pergunta: <em>"O que existe aqui que tem valor e que queremos cuidar?"</em></p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>O quê?</th><th>Está guardado onde?</th><th>Quem é o responsável?</th><th>Estado</th></tr></thead>
+<tbody>
+<tr><td>Fotos das festas 2010–2020</td><td>Celular da Mãe Rita e pendrive</td><td>Mãe Rita</td><td>Bom: pode perder</td></tr>
+<tr><td>Cantigas gravadas em cassete</td><td>Gaveta da secretaria</td><td>Pai João</td><td>Ruim: digitalizar urgente</td></tr>
+<tr><td>Receitas de comidas de santo</td><td>Memória da Dona Beatriz apenas</td><td>Dona Beatriz</td><td>Em risco: não registrado</td></tr>
+<tr><td colspan="4" style="color:var(--cinza-secundario);font-style:italic;text-align:center">[Continue preenchendo para cada item do terreiro]</td></tr>
+</tbody>
+</table>
+</div>
+<h1 id="g-p4">Passo 4: Classificar: quem pode acessar o quê? <a class="anchor-link" href="#g-p4">¶</a></h1>
+<table class="level-table">
+<tr class="level-row"><td><span class="level-dot dot-g"></span><span class="badge b-pub">PÚBLICO</span></td><td>Pode ser compartilhado livremente, incluindo redes sociais e imprensa.</td><td><em>Ex: fotos de festas abertas, convites, cartazes</em></td></tr>
+<tr class="level-row"><td><span class="level-dot dot-b"></span><span class="badge b-com">COMUNITÁRIO</span></td><td>Só para membros do terreiro: não para pessoas de fora.</td><td><em>Ex: atas de reuniões, lista de membros, calendário interno</em></td></tr>
+<tr class="level-row"><td><span class="level-dot dot-y"></span><span class="badge b-res">RESTRITO</span></td><td>Só para membros com determinado grau de iniciação ou função.</td><td><em>Ex: receitas específicas, orientações sobre orisás para iniciados</em></td></tr>
+<tr class="level-row"><td><span class="level-dot dot-r"></span><span class="badge b-sag">SAGRADO</span></td><td>Acesso limitado às lideranças religiosas, em contexto ritual específico.</td><td><em>Ex: rezas rituais, segredos de orisás, elementos de Feitura</em></td></tr>
+<tr class="level-row"><td><span class="level-dot dot-k"></span><span class="badge b-sec">SECRETO</span></td><td>Nunca deve ser registrado ou compartilhado. Pertence ao sagrado.</td><td><em>Ex: segredos iniciáticos, palavras de axé</em></td></tr>
+</table>
+<div class="box ouro">
+<div class="box-title">Dica prática</div>
+<p>Quando não souber em qual categoria colocar um conteúdo, classifique sempre na <strong>categoria mais protegida</strong>. A liderança religiosa tem a palavra final sobre qualquer classificação.</p>
+</div>
+<h1 id="g-p5">Passo 5: Pedir autorização antes de qualquer registro <a class="anchor-link" href="#g-p5">¶</a></h1>
+<p>Antes de gravar, fotografar, anotar ou registrar qualquer coisa no terreiro, é necessário pedir autorização. Isso vale tanto para pessoas de fora quanto para membros da própria comunidade.</p>
+<ul>
+<li>Antes de fotografar pessoas (mesmo em festas públicas)</li>
+<li>Antes de gravar áudios de rituais, cantigas ou conversas</li>
+<li>Antes de qualquer pesquisa ou entrevista</li>
+<li>Antes de publicar qualquer conteúdo sobre o terreiro</li>
+</ul>
+<h1 id="g-p6">Passo 6: Organizar e guardar os materiais com segurança <a class="anchor-link" href="#g-p6">¶</a></h1>
+<div class="box azul">
+<div class="box-title">Modelo de organização de pastas digitais</div>
+<div style="font-family:var(--fonte-mono);font-size:0.83rem;line-height:1.9;margin-top:0.5rem;">
+ TERREIRO_[NOME]<br>
+ &nbsp;&nbsp;&nbsp;01_PUBLICO<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fotos_Festas_Abertas<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Videos_Publicos<br>
+ &nbsp;&nbsp;&nbsp;02_COMUNITARIO<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fotos_Membros<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reunioes_Atas<br>
+ &nbsp;&nbsp;&nbsp;03_RESTRITO<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Materiais_Formativos<br>
+ &nbsp;&nbsp;&nbsp;04_SAGRADO<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Esta pasta fica no celular da liderança, com senha]<br>
+ &nbsp;&nbsp;&nbsp;05_HISTORICO_DOCUMENTOS
+ </div>
+</div>
+<ul class="checklist">
+<li>Backup feito nos últimos 30 dias</li>
+<li>Backup guardado em local diferente do arquivo principal</li>
+<li>Arquivos sagrados NÃO estão em nuvem pública</li>
+<li>Senhas foram trocadas nos últimos 6 meses</li>
+<li>O acesso ao celular/computador da liderança está protegido com senha</li>
+</ul>
+<h1 id="g-p7">Passo 7: Proteger conteúdos sagrados <a class="anchor-link" href="#g-p7">¶</a></h1>
+<div class="box terracota">
+<div class="box-title">O que nunca deve ser registrado ou compartilhado</div>
+<ul>
+<li>Segredos iniciáticos: o que acontece nos rituais de iniciação</li>
+<li>Palavras sagradas de axé, rezas de fundamento, palavras de orisás</li>
+<li>Imagens de rituais restritos: mesmo que a câmera seja da comunidade</li>
+<li>Nomes secretos espirituais de membros</li>
+<li>Conteúdo de consultas espirituais individuais</li>
+</ul>
+</div>
+<h1 id="g-p8">Passo 8: Regras para pesquisadores e visitantes <a class="anchor-link" href="#g-p8">¶</a></h1>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Tipo de visitante</th><th>O que pode</th><th>O que não pode</th><th>Obrigatório</th></tr></thead>
+<tbody>
+<tr><td><strong>Pesquisador universitário</strong></td><td>Observar festas públicas; entrevistar membros que concordarem</td><td>Gravar sem autorização; acesso a conteúdos sagrados</td><td>Assinar Termo; submeter texto antes de publicar</td></tr>
+<tr><td><strong>Jornalista / Documentarista</strong></td><td>Registrar festas públicas com autorização</td><td>Gravar rituais sem autorização específica</td><td>Apresentar pauta com antecedência; mostrar material antes de publicar</td></tr>
+<tr><td><strong>Turista cultural</strong></td><td>Participar de festas abertas ao público</td><td>Fotografar objetos sagrados; entrar em espaços restritos</td><td>Respeitar orientações da liderança</td></tr>
+</tbody>
+</table>
+</div>
+<h1 id="g-p9">Passo 9: Preservar a memória do terreiro <a class="anchor-link" href="#g-p9">¶</a></h1>
+<p>Preservar a memória é um ato de amor à ancestralidade. Muitos conhecimentos vivem apenas nas memórias dos mais velhos. Este passo mostra como registrar histórias e memórias de forma respeitosa.</p>
+<div class="steps">
+<div class="step"><div class="step-num">1</div><div class="step-body"><strong>Converse com a liderança</strong><p>Pergunte quais memórias eles gostariam de preservar. Nunca decida sozinho.</p></div></div>
+<div class="step"><div class="step-num">2</div><div class="step-body"><strong>Escolha um momento tranquilo</strong><p>A oralidade não combina com correria. Sem pressa, sem agenda rígida.</p></div></div>
+<div class="step"><div class="step-num">3</div><div class="step-body"><strong>Peça autorização para gravar</strong><p>Em áudio ou vídeo, antes de começar. Nunca grave sem consentimento.</p></div></div>
+<div class="step"><div class="step-num">4</div><div class="step-body"><strong>Comece de forma leve</strong><p>Não imponha roteiro rígido. Deixe a pessoa falar, conduza naturalmente.</p></div></div>
+<div class="step"><div class="step-num">5</div><div class="step-body"><strong>Respeite os limites</strong><p>Se surgir conteúdo sagrado ou restrito, não insista. Agradeça e encerre esse trecho.</p></div></div>
+<div class="step"><div class="step-num">6</div><div class="step-body"><strong>Confirme e guarde</strong><p>Mostre o registro à pessoa para ela confirmar que está bem. Guarde com a classificação correta.</p></div></div>
+</div>
+<h1 id="g-p10">Passo 10: Revisar e atualizar as regras <a class="anchor-link" href="#g-p10">¶</a></h1>
+<ul class="checklist">
+<li>As autorizações de pesquisadores ainda estão válidas?</li>
+<li>Os backups estão sendo feitos regularmente?</li>
+<li>Há novos materiais que precisam ser classificados?</li>
+<li>As senhas foram trocadas nos últimos 6 meses?</li>
+<li>Houve algum problema com uso indevido de conteúdo?</li>
+<li>O grupo responsável ainda está completo?</li>
+<li>A comunidade foi informada sobre o status do sistema de proteção?</li>
+</ul>
+<h1 id="g-ia">Cuidados com Inteligência Artificial e internet <a class="anchor-link" href="#g-ia">¶</a></h1>
+<p>A Inteligência Artificial (IA) é uma tecnologia que "aprende" com imagens, textos e sons disponíveis na internet. Isso cria riscos novos e sérios para as comunidades de terreiro.</p>
+<div class="box terracota">
+<div class="box-title">Riscos da IA para os terreiros</div>
+<ul>
+<li><strong>Treinamento sem permissão:</strong> sistemas de IA podem usar cantigas, fotos e textos do terreiro para "aprender" e reproduzir sem crédito.</li>
+<li><strong>Falsificações (deepfakes):</strong> é possível criar vídeos falsos de rituais ou textos que parecem ter sido escritos pelo terreiro.</li>
+<li><strong>Coleta massiva (scraping):</strong> robôs automáticos coletam tudo que está disponível na internet. Se o terreiro tem um site, esse conteúdo é capturado.</li>
+<li><strong>Uso comercial indevido:</strong> empresas usam elementos culturais do Candomblé como "inspiração" para produtos sem compensar os terreiros.</li>
+</ul>
+</div>
+<div class="box ouro">
+<div class="box-title">Como se proteger</div>
+<ul>
+<li>Não publique cantigas sagradas ou restritas em nenhuma plataforma aberta na internet.</li>
+<li>Nunca use ferramentas de IA (ChatGPT, Gemini, etc.) para processar informações sagradas do terreiro.</li>
+<li>Se alguém quiser "digitalizar em grande escala" os conteúdos do terreiro, desconfie e consulte o grupo responsável.</li>
+<li>Inclua na publicação: <em>"Vedado o uso por sistemas de Inteligência Artificial."</em></li>
+</ul>
+</div>
+<div class="box ouro" style="text-align:center; margin-top:2rem;">
+<div class="box-title">Axéeeee!</div>
+<p>A proteção dos conhecimentos do Candomblé é também uma forma de resistência. Nossos ancestrais mantiveram o axé vivo através de séculos. Com as ferramentas do nosso tempo: e com a força que sempre nos sustentou: é nossa vez de continuar.</p>
+<p><em>Que os orisás guiem este trabalho. Que as gerações que virão encontrem o terreiro vivo, organizado e soberano.</em></p>
+<p><strong>Laroyê! Eparrei! Saluba! Agô!</strong></p>
+</div>
+</div>
+</div><!-- /guia -->
+<!-- ========== PROTOCOLO ========== -->
+<div class="doc-page" id="page-proto">
+<div class="page-header">
+<div class="ph-tag p">Protocolo Técnico-Institucional</div>
+<h1>Protocolo de Curadoria, Governança e Proteção de Dados e Conhecimentos Tradicionais de Terreiros de Candomblé</h1>
+</div>
+<div class="content-wrap">
+<div class="download-bar">
+<div class="dl-icon">Protocolo </div>
+<div class="dl-text"><strong>Protocolo Institucional: Versão 1.0 | 2025</strong><span>Documento técnico completo com fundamentação jurídica, matrizes e indicadores</span></div>
+<a class="dl-btn" href="Protocolo_Candomble_Dados_v1.docx" download>Baixar (.docx)</a>
+</div>
+<h1 id="p-lacunas">Lacunas identificadas no documento-base <a class="anchor-link" href="#p-lacunas">¶</a></h1>
+<p>A análise crítica do documento-base identificou as seguintes lacunas em comparação com padrões internacionais robustos:</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Dimensão</th><th>Lacunas identificadas</th></tr></thead>
+<tbody>
+<tr><td><strong>Governança operacional</strong></td><td>Ausência de estrutura detalhada do Conselho de Governança, fluxogramas de decisão e mecanismos de resolução de conflitos</td></tr>
+<tr><td><strong>Segurança da informação</strong></td><td>Ausência completa de especificações técnicas de segurança, política de backup, gestão de incidentes e anonimização</td></tr>
+<tr><td><strong>Proteção contra IA</strong></td><td>Ausência de cláusulas vedando treinamento de IA, mecanismos anti-scraping e licenças específicas</td></tr>
+<tr><td><strong>Jurídico</strong></td><td>Insuficiente articulação com LGPD, Convenção 169 OIT, PNPCT e ausência de modelos jurídicos operacionais</td></tr>
+<tr><td><strong>Metodológico</strong></td><td>Ausência de taxonomia formal, ontologias afro-brasileiras e padrões de metadados culturais</td></tr>
+<tr><td><strong>Preservação digital</strong></td><td>Falta de plano de longo prazo, formatos recomendados e política de migração tecnológica</td></tr>
+<tr><td><strong>Métricas</strong></td><td>Ausência de indicadores de desempenho, mecanismos de auditoria e Matriz RACI</td></tr>
+<tr><td><strong>Sustentabilidade</strong></td><td>Ausência de modelos de financiamento e estratégias de capacitação continuada</td></tr>
+</tbody>
+</table>
+</div>
+<h1 id="p-principios">Princípios norteadores <a class="anchor-link" href="#p-principios">¶</a></h1>
+<div class="table-wrap">
+<table>
+<thead><tr><th>#</th><th>Princípio</th><th>Descrição</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>Soberania de dados comunitários</strong></td><td>Os terreiros são a instância decisória máxima. Nenhuma instituição externa pode exercer autoridade sobre esses dados sem autorização comunitária expressa.</td></tr>
+<tr><td>2</td><td><strong>Consentimento CLPI</strong></td><td>Todo acesso exige consentimento livre, prévio e informado. O consentimento é coletivo e pode ser retirado a qualquer momento.</td></tr>
+<tr><td>3</td><td><strong>Não extração epistêmica</strong></td><td>Vedada qualquer extração de conhecimento sem retorno efetivo, coautoria reconhecida e compartilhamento de benefícios.</td></tr>
+<tr><td>4</td><td><strong>Proteção antirracista</strong></td><td>Toda decisão de governança deve avaliar seu potencial de perpetuar ou combater desigualdades raciais.</td></tr>
+<tr><td>5</td><td><strong>Ética intercultural</strong></td><td>A ética aplicada deve dialogar com os sistemas éticos próprios do Candomblé: ase, axé, iwa, itan: sem reduzi-los a categorias ocidentais.</td></tr>
+<tr><td>6</td><td><strong>Salvaguarda intergeracional</strong></td><td>A gestão de dados deve garantir que o patrimônio cultural seja preservado para gerações futuras.</td></tr>
+</tbody>
+</table>
+</div>
+<h1 id="p-juridico">Fundamentação jurídica <a class="anchor-link" href="#p-juridico">¶</a></h1>
+<ul>
+<li><strong>CF/1988, Arts. 215-216:</strong> Proteção às manifestações das culturas afro-brasileiras e ao patrimônio cultural imaterial.</li>
+<li><strong>Lei nº 12.288/2010: Estatuto da Igualdade Racial:</strong> Reconhece direito à preservação de tradições e manifestações religiosas de matriz africana.</li>
+<li><strong>Convenção 169 da OIT:</strong> Direito à consulta prévia e consentimento livre e informado para decisões que afetem conhecimentos tradicionais.</li>
+<li><strong>LGPD: Lei nº 13.709/2018:</strong> Dados sobre religião são dados sensíveis com proteção especial (Art. 11).</li>
+<li><strong>Decreto nº 6.040/2007: PNPCT:</strong> Reconhece comunidades de terreiro como Povos e Comunidades Tradicionais.</li>
+<li><strong>UNESCO, Convenção 2003:</strong> Direito das comunidades de identificar e definir seu patrimônio imaterial e participar de sua salvaguarda.</li>
+<li><strong>Protocolo de Nagoya (2010):</strong> Mecanismos de repartição justa de benefícios derivados de conhecimentos tradicionais associados.</li>
+</ul>
+<h1 id="p-classificacao">Classificação dos dados e níveis de acesso <a class="anchor-link" href="#p-classificacao">¶</a></h1>
+<h2>Taxonomia de tipos de dados</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Categoria</th><th>Exemplos</th><th>Sensibilidade padrão</th></tr></thead>
+<tbody>
+<tr><td>Litúrgicos e Rituais</td><td>Sequências de cânticos, calendário litúrgico, ritos de iniciação</td><td><span class="badge b-sag">Sagrado</span></td></tr>
+<tr><td>Iniciáticos e Secretos</td><td>Segredos de feitura, rezas específicas de orisás</td><td><span class="badge b-sec">Vedado</span></td></tr>
+<tr><td>Etnobotânicos e Bioculturais</td><td>Uso de ervas, folhas sagradas, animais rituais, conhecimentos de cura</td><td><span class="badge b-sag">Sagrado</span></td></tr>
+<tr><td>Musicais e Sonoros</td><td>Cantigas de orisás, toques de atabaques, cantos rituais</td><td>Varia por contexto</td></tr>
+<tr><td>Territoriais e Arquitetônicos</td><td>Planta do terreiro, localização de árvores sagradas</td><td><span class="badge b-com">Comunitário</span></td></tr>
+<tr><td>Históricos e Memoriais</td><td>Histórico de fundação, cronologia de lideranças, narrativas orais</td><td><span class="badge b-com">Comunitário</span> / <span class="badge b-pub">Público</span></td></tr>
+</tbody>
+</table>
+</div>
+<h2>Etiquetas TK/BC adaptadas ao Candomblé</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Código</th><th>Etiqueta</th><th>Significado</th></tr></thead>
+<tbody>
+<tr><td><code>TK-S</code></td><td><strong>TK Sagrado</strong></td><td>Acesso, reprodução ou uso restrito às condições definidas pela liderança religiosa.</td></tr>
+<tr><td><code>TK-I</code></td><td><strong>TK Iniciático</strong></td><td>Restrito a pessoas iniciadas no grau correspondente.</td></tr>
+<tr><td><code>TK-R</code></td><td><strong>TK Ritual</strong></td><td>Vinculado a contexto ritual específico. Reprodução fora desse contexto requer autorização.</td></tr>
+<tr><td><code>BC-M</code></td><td><strong>BC Medicinal</strong></td><td>Contém conhecimento biocultural medicinal protegido. Usos farmacológicos requerem acordo de benefícios.</td></tr>
+<tr><td><code>NO-AI</code></td><td><strong>Sem uso por IA</strong></td><td>Vedado uso para treinar, ajustar ou avaliar sistemas de Inteligência Artificial.</td></tr>
+<tr><td><code>NO-COM</code></td><td><strong>Sem uso comercial</strong></td><td>Vedado uso para fins comerciais, incluindo turismo, mídia e entretenimento.</td></tr>
+</tbody>
+</table>
+</div>
+<h1 id="p-governanca">Governança comunitária <a class="anchor-link" href="#p-governanca">¶</a></h1>
+<p>A governança estrutura-se em três níveis complementares:</p>
+<div class="steps">
+<div class="step"><div class="step-num">1</div><div class="step-body"><strong>Assembleia Comunitária</strong><p>Instância máxima de deliberação, composta por todos os membros com grau de iniciação completo. Reúne-se anualmente ou extraordinariamente.</p></div></div>
+<div class="step"><div class="step-num">2</div><div class="step-body"><strong>Conselho de Governança de Dados (CGD)</strong><p>Órgão colegiado de 5 membros com mandato de 2 anos: liderança principal, liderança intermediária, guardião de conhecimento, curador de dados e representante dos membros.</p></div></div>
+<div class="step"><div class="step-num">3</div><div class="step-body"><strong>Equipe de Curadoria</strong><p>Responde ao CGD e executa as atividades cotidianas de gestão de dados, catalogação, segurança e consentimentos.</p></div></div>
+</div>
+<h1 id="p-consentimento">Consentimento Livre, Prévio e Informado (CLPI) <a class="anchor-link" href="#p-consentimento">¶</a></h1>
+<p>O modelo de consentimento reconhece que o CLPI no contexto dos terreiros transcende o modelo individual da LGPD, incorporando dimensões coletivas, rituais e espirituais.</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Tipo de consentimento</th><th>O que cobre</th><th>Quem autoriza</th></tr></thead>
+<tbody>
+<tr><td><strong>Comunitário Geral</strong></td><td>Existência do sistema de dados e políticas gerais</td><td>CGD + Assembleia: revisado anualmente</td></tr>
+<tr><td><strong>Para Pesquisa</strong></td><td>Acesso de pesquisadores externos, com escopo e prazo definidos</td><td>CGD após análise do projeto</td></tr>
+<tr><td><strong>Ritual</strong></td><td>Registro de elementos de natureza ritual ou sagrada</td><td>Liderança religiosa: pode ser revogado a qualquer momento</td></tr>
+<tr><td><strong>Audiovisual</strong></td><td>Captação de imagem ou som de pessoas e espaços</td><td>Liderança + cada pessoa que aparece</td></tr>
+<tr><td><strong>Para Gravação Oral</strong></td><td>Registro de conhecimento transmitido oralmente</td><td>Guardião do conhecimento + liderança</td></tr>
+</tbody>
+</table>
+</div>
+<h1 id="p-seguranca">Segurança da informação <a class="anchor-link" href="#p-seguranca">¶</a></h1>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Controle</th><th>Descrição</th><th>Nível mínimo</th></tr></thead>
+<tbody>
+<tr><td>Criptografia em repouso</td><td>AES-256 ou superior</td><td>N3 e acima</td></tr>
+<tr><td>Autenticação multifator</td><td>Dois ou mais fatores de verificação</td><td>N4 e acima</td></tr>
+<tr><td>Logs de acesso</td><td>Registro imutável de todos os acessos e downloads</td><td>Todos os níveis</td></tr>
+<tr><td>Segregação de rede</td><td>Dados mais sensíveis em rede isolada (air-gap)</td><td>N6-N7</td></tr>
+<tr><td>Backup offline isolado</td><td>Cópia offline fora do ambiente digital principal</td><td>N5 e acima</td></tr>
+<tr><td>Proteção anti-scraping</td><td>Bloqueio de coleta automatizada por bots e spiders</td><td>Todos os sistemas</td></tr>
+</tbody>
+</table>
+</div>
+<h1 id="p-riscos">Matriz de riscos <a class="anchor-link" href="#p-riscos">¶</a></h1>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Risco</th><th>Impacto</th><th>Prob.</th><th>Nível</th><th>Mitigação</th></tr></thead>
+<tbody>
+<tr><td>Vazamento de dados sagrados ou iniciáticos</td><td>Crítico</td><td>Média</td><td style="color:#8B3010;font-weight:600">CRÍTICO</td><td>Segregação de ambientes; acesso mínimo; auditorias</td></tr>
+<tr><td>Treinamento de IA com dados do terreiro</td><td>Alto</td><td>Alta</td><td style="color:#8B3010;font-weight:600">ALTO</td><td>Cláusula NO-AI; metadados de proteção; monitoramento</td></tr>
+<tr><td>Uso não autorizado por pesquisadores</td><td>Alto</td><td>Alta</td><td style="color:#8B3010;font-weight:600">ALTO</td><td>Termos com cláusulas de penalidade; auditoria de publicações</td></tr>
+<tr><td>Morte/incapacidade de guardiões de conhecimento</td><td>Crítico</td><td>Média</td><td style="color:#8B3010;font-weight:600">CRÍTICO</td><td>Documentação sistemática; formação de sucessores</td></tr>
+<tr><td>Ataque cibernético ao sistema</td><td>Alto</td><td>Média</td><td style="color:#9A6820;font-weight:600">ALTO</td><td>Criptografia; backup offline; plano de resposta a incidentes</td></tr>
+<tr><td>Falta de recursos para manutenção</td><td>Alto</td><td>Média</td><td style="color:#9A6820;font-weight:600">ALTO</td><td>Diversificação de fontes de financiamento; plano de contingência</td></tr>
+</tbody>
+</table>
+</div>
+<h1 id="p-raci">Matriz RACI <a class="anchor-link" href="#p-raci">¶</a></h1>
+<p style="font-size:0.85rem;color:var(--cinza-secundario);margin-bottom:0.75rem;">R = Responsável (executa) · A = Prestador de Contas (aprova) · C = Consultado · I = Informado</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Processo</th><th>Liderança</th><th>CGD</th><th>Curador</th><th>TI</th><th>Guardião</th></tr></thead>
+<tbody>
+<tr><td>Coleta de dados novos</td><td>A</td><td>A</td><td>R</td><td>C</td><td>C</td></tr>
+<tr><td>Classificação de sensibilidade</td><td>C</td><td>A</td><td>R</td><td>C</td><td>C</td></tr>
+<tr><td>Aprovação de acesso externo</td><td>C</td><td>A/R</td><td>C</td><td>I</td><td>C</td></tr>
+<tr><td>Segurança e controle de acesso</td><td>I</td><td>A</td><td>C</td><td>R</td><td>I</td></tr>
+<tr><td>Gestão de incidentes</td><td>A</td><td>R</td><td>C</td><td>R</td><td>I</td></tr>
+<tr><td>Auditoria interna</td><td>I</td><td>R</td><td>C</td><td>C</td><td>I</td></tr>
+<tr><td>Revisão cultural de publicações</td><td>C</td><td>A</td><td>C</td><td>I</td><td>R</td></tr>
+<tr><td>Prestação de contas à comunidade</td><td>R/A</td><td>R</td><td>C</td><td>I</td><td>I</td></tr>
+</tbody>
+</table>
+</div>
+<h1 id="p-indicadores">Indicadores e auditoria <a class="anchor-link" href="#p-indicadores">¶</a></h1>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Dimensão</th><th>Indicador</th><th>Meta</th><th>Frequência</th></tr></thead>
+<tbody>
+<tr><td>Conformidade jurídica</td><td>% de processos de coleta com consentimento registrado</td><td>100%</td><td>Trimestral</td></tr>
+<tr><td>Segurança</td><td>Nº de incidentes de acesso não autorizado</td><td>0 críticos</td><td>Mensal</td></tr>
+<tr><td>Classificação</td><td>% do acervo com classificação de sensibilidade aplicada</td><td>100%</td><td>Semestral</td></tr>
+<tr><td>Proteção cultural</td><td>Nº de casos de uso não autorizado de dados</td><td>0 não mitigados</td><td>Trimestral</td></tr>
+<tr><td>Pesquisa ética</td><td>% de pesquisas com Termo de Parceria assinado antes do início</td><td>100%</td><td>Contínua</td></tr>
+<tr><td>Sustentabilidade</td><td>Nº de fontes ativas de financiamento</td><td>> 2</td><td>Anual</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><!-- /proto -->
+<!-- ========== MODELOS ========== -->
+<div class="doc-page" id="page-modelos">
+<div class="page-header">
+<div class="ph-tag m">Modelos e Templates</div>
+<h1>Modelos, Formulários e Checklists Prontos para Uso</h1>
+</div>
+<div class="content-wrap">
+<p>Todos os modelos abaixo podem ser copiados, impressos ou adaptados pela comunidade do terreiro. Campos entre colchetes <span style="font-family:var(--fonte-mono);background:#f0f0f0;padding:0.1em 0.3em;border-radius:3px;font-size:0.85em;">[assim]</span> devem ser preenchidos pela comunidade.</p>
+<div class="template-grid">
+<div class="template-card" onclick="scrollTo('m-consentimento')"><div class="t-icon"></div><div class="t-title">Consentimento comunitário</div><div class="t-desc">Para pesquisas e parcerias com instituições externas</div></div>
+<div class="template-card" onclick="scrollTo('m-imagem')"><div class="t-icon"></div><div class="t-title">Autorização de imagem</div><div class="t-desc">Para fotos e vídeos de membros do terreiro</div></div>
+<div class="template-card" onclick="scrollTo('m-pesquisador')"><div class="t-icon"></div><div class="t-title">Termo para pesquisador</div><div class="t-desc">Condições e restrições para acesso de pesquisadores</div></div>
+<div class="template-card" onclick="scrollTo('m-inventario')"><div class="t-icon">Modelos </div><div class="t-title">Ficha de inventário</div><div class="t-desc">Para listar o que o terreiro tem e onde está guardado</div></div>
+<div class="template-card" onclick="scrollTo('m-catalogacao')"><div class="t-icon"></div><div class="t-title">Ficha de catalogação</div><div class="t-desc">Para registro técnico de cada item do acervo</div></div>
+<div class="template-card" onclick="scrollTo('m-incidente')"><div class="t-icon"></div><div class="t-title">Protocolo de incidente</div><div class="t-desc">Passo a passo para quando algo der errado</div></div>
+<div class="template-card" onclick="scrollTo('m-etiquetas')"><div class="t-icon"></div><div class="t-title">Etiquetas TK/BC</div><div class="t-desc">Sistema de etiquetas adaptado para os terreiros</div></div>
+<div class="template-card" onclick="scrollTo('m-checklists')"><div class="t-icon"></div><div class="t-title">Checklists prontos</div><div class="t-desc">Listas de verificação para cada situação</div></div>
+</div>
+<h1 id="m-consentimento">Modelo A: Termo de Parceria de Pesquisa e Consentimento Comunitário <a class="anchor-link" href="#m-consentimento">¶</a></h1>
+<div class="form-template">
+<span class="label">TERMO DE PARCERIA DE PESQUISA E CONSENTIMENTO COMUNITÁRIO</span>
+
+Terreiro: <span class="field">[nome completo do terreiro]</span>
+Nação: <span class="field">[Ketu / Jeje / Angola / Efon / outra]</span>
+Liderança responsável: <span class="field">[nome]</span>
+Conselho de Governança de Dados: CGD
+
+PESQUISADOR(A) / INSTITUIÇÃO PARCEIRA:
+Nome: <span class="field">[nome completo]</span>
+Instituição: <span class="field">[nome da universidade ou organização]</span>
+Projeto: <span class="field">[título e breve descrição]</span>
+
+O terreiro <span class="field">[NOME]</span>, por meio de seu Conselho de Governança de Dados,
+AUTORIZA o(a) pesquisador(a) acima a acessar os dados especificados
+no Adendo I, nas seguintes condições:
+
+1. Período de acesso: <span class="field">[data início]</span> a <span class="field">[data fim]</span>
+2. Dados autorizados: <span class="field">[conforme Adendo I anexo]</span>
+3. Finalidade exclusiva: <span class="field">[descrever]</span>
+4. Publicação: sujeita à revisão prévia do CGD (prazo de 30 dias)
+5. Coautoria: <span class="field">[forma acordada de reconhecimento]</span>
+6. Retorno à comunidade: <span class="field">[produtos e prazo acordados]</span>
+7. VEDAÇÕES: uso por IA · uso comercial · divulgação de dados N5+
+
+O descumprimento sujeita o(a) pesquisador(a) às penalidades legais
+cabíveis e à revogação imediata do acesso.
+
+Local e data: <span class="field">_________________________</span>
+Assinatura da liderança: <span class="field">_________________________</span>
+Assinatura do Presidente do CGD: <span class="field">_________________________</span>
+Assinatura do(a) pesquisador(a): <span class="field">_________________________</span>
+</div>
+<h1 id="m-imagem">Modelo B: Autorização de Uso de Imagem <a class="anchor-link" href="#m-imagem">¶</a></h1>
+<div class="form-template">
+<span class="label">AUTORIZAÇÃO DE USO DE IMAGEM</span>
+
+Terreiro: <span class="field">[nome]</span> Data: <span class="field">___/___/______</span>
+
+Eu, <span class="field">[nome completo]</span>, membro do terreiro <span class="field">[nome]</span>,
+
+AUTORIZO [ ] / NÃO AUTORIZO [ ]
+
+o uso da minha imagem (foto ou vídeo) pelo terreiro, nas condições:
+
+Pode usar em:
+ [ ] Redes sociais do terreiro
+ [ ] Materiais impressos e de divulgação
+ [ ] Pesquisas e documentações internas
+ [ ] Eventos e exposições
+
+NÃO pode usar em:
+ [ ] Fins comerciais
+ [ ] Reportagens sem consulta prévia
+ [ ] Fora do contexto do terreiro
+ [ ] Sistemas de Inteligência Artificial
+
+Esta autorização pode ser cancelada a qualquer momento, por escrito.
+
+Assinatura: <span class="field">________________________</span> CPF: <span class="field">_________________</span>
+Responsável pelo terreiro: <span class="field">________________________</span>
+</div>
+<h1 id="m-pesquisador">Modelo C: Termo de Compromisso para Pesquisador(a) <a class="anchor-link" href="#m-pesquisador">¶</a></h1>
+<div class="form-template">
+<span class="label">TERMO DE COMPROMISSO PARA PESQUISADOR(A)</span>
+
+Eu, <span class="field">[nome]</span>, pesquisador(a) da <span class="field">[instituição]</span>, comprometo-me a:
+
+[ ] Respeitar todas as regras de acesso definidas pelo terreiro
+[ ] Não gravar, fotografar ou filmar sem autorização expressa
+[ ] Não acessar conteúdos sagrados ou iniciáticos
+[ ] Submeter todos os textos ao CGD antes de publicar
+[ ] Citar o terreiro <span class="field">[NOME]</span> como fonte e coautor em todas as publicações
+[ ] Entregar cópia de todas as publicações ao terreiro
+[ ] Não compartilhar informações com terceiros sem autorização
+[ ] Não usar informações para fins comerciais sem acordo prévio
+[ ] NÃO usar nenhum dado do terreiro para treinar sistemas de IA
+[ ] Comunicar ao CGD qualquer imprevisto ou mudança no projeto
+
+Estou ciente de que o descumprimento resulta em revogação
+imediata do acesso e nas sanções legais cabíveis.
+
+Assinatura: <span class="field">________________________</span>
+Data: <span class="field">___/___/______</span>
+</div>
+<h1 id="m-inventario">Modelo D: Ficha de Inventário do Terreiro <a class="anchor-link" href="#m-inventario">¶</a></h1>
+<div class="table-wrap">
+<table>
+<thead><tr><th>O quê?</th><th>Tipo</th><th>Guardado onde?</th><th>Responsável</th><th>Estado</th><th>Classificação</th></tr></thead>
+<tbody>
+<tr><td style="font-style:italic;color:var(--cinza-secundario)">[preencher]</td><td>[preencher]</td><td>[preencher]</td><td>[preencher]</td><td>[preencher]</td><td>[preencher]</td></tr>
+<tr><td style="font-style:italic;color:var(--cinza-secundario)">[preencher]</td><td>[preencher]</td><td>[preencher]</td><td>[preencher]</td><td>[preencher]</td><td>[preencher]</td></tr>
+<tr><td style="font-style:italic;color:var(--cinza-secundario)">[preencher]</td><td>[preencher]</td><td>[preencher]</td><td>[preencher]</td><td>[preencher]</td><td>[preencher]</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Tipos:</strong> Fotos · Vídeos · Áudios · Documentos · Receitas · Ervas/Plantas · Objetos · Memória oral · Mapas · Cantigas · Genealogia</p>
+<p><strong>Estado:</strong> Bom · Precisa digitalizar · Em risco · Deteriorado · Só na memória oral</p>
+<h1 id="m-catalogacao">Modelo E: Ficha de Catalogação de Item do Acervo <a class="anchor-link" href="#m-catalogacao">¶</a></h1>
+<div class="form-template">
+<span class="label">FICHA DE CATALOGAÇÃO: ACERVO CULTURAL DO TERREIRO</span>
+
+ID do item: <span class="field">_____________</span> Data de registro: <span class="field">___/___/______</span>
+
+Tipo de dado:
+ [ ] Litúrgico [ ] Musical [ ] Etnobotânico [ ] Histórico
+ [ ] Visual/Foto [ ] Audiovisual [ ] Documental [ ] Outro: <span class="field">______</span>
+
+Título/denominação (língua original): <span class="field">___________________________</span>
+Título/denominação (português): <span class="field">______________________________</span>
+Nação do Candomblé: <span class="field">__________________________________________</span>
+Orisá associado (se aplicável): <span class="field">_________________________________</span>
+Guardião do conhecimento: <span class="field">_____________________________________</span>
+
+Contexto de origem e transmissão:
+<span class="field">______________________________________________</span>
+
+Modo de transmissão:
+ [ ] Oral [ ] Ritual [ ] Escrita [ ] Audiovisual
+
+Nível de sensibilidade:
+ [ ] N1-Público [ ] N2-Educacional [ ] N3-Pesquisador
+ [ ] N4-Comunitário [ ] N5-Liderança [ ] N6-Iniciático [ ] N7-Sagrado
+
+Etiquetas TK/BC aplicáveis:
+ [ ] TK-S [ ] TK-I [ ] TK-R [ ] BC-M [ ] NO-AI [ ] NO-COM
+
+Restrições específicas de acesso:
+<span class="field">______________________________________________</span>
+
+ID do consentimento que autoriza o registro: <span class="field">___________</span>
+Curador responsável: <span class="field">__________________________________________</span>
+</div>
+<h1 id="m-incidente">Modelo F: Protocolo de Resposta a Incidentes <a class="anchor-link" href="#m-incidente">¶</a></h1>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Etapa</th><th>Ação</th><th>Prazo</th><th>Responsável</th></tr></thead>
+<tbody>
+<tr><td><strong>1. Detecção</strong></td><td>Identificar e confirmar o incidente; avaliar escopo preliminar</td><td>Imediato</td><td>TI</td></tr>
+<tr><td><strong>2. Contenção</strong></td><td>Isolar sistemas afetados; bloquear acessos comprometidos</td><td>4h</td><td>TI</td></tr>
+<tr><td><strong>3. Notif. CGD</strong></td><td>Comunicar o CGD com informações preliminares</td><td>24h</td><td>TI</td></tr>
+<tr><td><strong>4. Avaliação cultural</strong></td><td>Determinar impacto cultural da exposição; consultar liderança</td><td>48h</td><td>CGD + Guardião</td></tr>
+<tr><td><strong>5. Notif. comunidade</strong></td><td>Comunicar a comunidade de forma clara e acessível</td><td>72h</td><td>CGD</td></tr>
+<tr><td><strong>6. Notif. ANPD</strong></td><td>Notificar a autoridade quando exigido pela LGPD</td><td>72h (legal)</td><td>CGD + Advogado</td></tr>
+<tr><td><strong>7. Remediação</strong></td><td>Implementar correções; recuperar dados afetados</td><td>Conforme plano</td><td>TI + CGD</td></tr>
+<tr><td><strong>8. Pós-incidente</strong></td><td>Documentar lições aprendidas; propor melhorias</td><td>30 dias</td><td>CGD</td></tr>
+</tbody>
+</table>
+</div>
+<h1 id="m-etiquetas">Modelo G: Etiquetas TK/BC para os Terreiros <a class="anchor-link" href="#m-etiquetas">¶</a></h1>
+<div class="template-grid">
+<div class="template-card" style="border-left:4px solid #C07858"><div class="t-icon"></div><div class="t-title">TK-S: TK Sagrado</div><div class="t-desc">Acesso restrito às condições definidas pela liderança religiosa competente.</div></div>
+<div class="template-card" style="border-left:4px solid #140C04"><div class="t-icon"></div><div class="t-title">TK-I: TK Iniciático</div><div class="t-desc">Restrito a pessoas iniciadas no grau correspondente.</div></div>
+<div class="template-card" style="border-left:4px solid #D4A880"><div class="t-icon"></div><div class="t-title">TK-R: TK Ritual</div><div class="t-desc">Reprodução fora do contexto ritual requer autorização específica.</div></div>
+<div class="template-card" style="border-left:4px solid #7A9870"><div class="t-icon"></div><div class="t-title">BC-M: BC Medicinal</div><div class="t-desc">Usos farmacológicos requerem acordo de compartilhamento de benefícios.</div></div>
+<div class="template-card" style="border-left:4px solid #90A8C0"><div class="t-icon"></div><div class="t-title">TK-O: TK Oral</div><div class="t-desc">Conteúdo transmitido pela oralidade. Registro requer consentimento específico.</div></div>
+<div class="template-card" style="border-left:4px solid #8B3010"><div class="t-icon"></div><div class="t-title">NO-AI: Sem uso por IA</div><div class="t-desc">Vedado treinar, ajustar ou avaliar sistemas de Inteligência Artificial.</div></div>
+</div>
+<div class="box ouro">
+<div class="box-title">Como usar as etiquetas</div>
+<p>Inclua o código da etiqueta no nome dos arquivos e nos metadados. Exemplo:<br>
+<code>2024_Cantiga_Oxum_TK-S_NO-AI.mp3</code><br>
+ Em materiais publicados, inclua a legenda: <em>"TK-S · NO-AI: Conteúdo protegido. Vedado uso por sistemas de IA."</em></p>
+</div>
+<h1 id="m-raci">Modelo H: Matriz RACI Simplificada <a class="anchor-link" href="#m-raci">¶</a></h1>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Processo</th><th>Liderança</th><th>CGD</th><th>Curador</th><th>TI</th><th>Guardião</th><th>Pesquisador</th></tr></thead>
+<tbody>
+<tr><td>Coleta de dados novos</td><td>A</td><td>A</td><td>R</td><td>C</td><td>C</td><td></td></tr>
+<tr><td>Classificar sensibilidade</td><td>C</td><td>A</td><td>R</td><td>C</td><td>C</td><td></td></tr>
+<tr><td>Aprovar acesso externo</td><td>C</td><td>A/R</td><td>C</td><td>I</td><td>C</td><td></td></tr>
+<tr><td>Executar pesquisa autorizada</td><td>I</td><td>A</td><td>C</td><td>I</td><td>R/C</td><td>R</td></tr>
+<tr><td>Segurança e controle</td><td>I</td><td>A</td><td>C</td><td>R</td><td>I</td><td></td></tr>
+<tr><td>Gestão de incidentes</td><td>A</td><td>R</td><td>C</td><td>R</td><td>I</td><td>I</td></tr>
+<tr><td>Revisão cultural</td><td>C</td><td>A</td><td>C</td><td>I</td><td>R</td><td>I</td></tr>
+<tr><td>Prestação de contas</td><td>R/A</td><td>R</td><td>C</td><td>I</td><td>I</td><td></td></tr>
+</tbody>
+</table>
+</div>
+<h1 id="m-checklists">Modelo I: Checklists Prontos <a class="anchor-link" href="#m-checklists">¶</a></h1>
+<h2>Checklist de Implantação Inicial</h2>
+<ul class="checklist">
+<li>Realizou a primeira reunião comunitária com aprovação da liderança</li>
+<li>Formou o grupo responsável pela proteção dos dados</li>
+<li>Fez o inventário do que existe no terreiro</li>
+<li>Classificou os materiais existentes por categoria (N1 a N7)</li>
+<li>Criou as pastas de organização (físicas e digitais)</li>
+<li>Estabeleceu a política de backup</li>
+<li>Definiu as regras para visitantes e pesquisadores</li>
+<li>Criou e guardou os modelos de autorização</li>
+<li>Apresentou o sistema à comunidade em assembleia</li>
+</ul>
+<h2>Checklist de Segurança Digital</h2>
+<ul class="checklist">
+<li>Todos os arquivos estão em pastas organizadas com classificação no nome</li>
+<li>Backup feito nos últimos 30 dias</li>
+<li>Backup guardado em local diferente do arquivo principal</li>
+<li>Arquivos sagrados NÃO estão em nuvem pública</li>
+<li>Senhas foram trocadas nos últimos 6 meses</li>
+<li>Nenhum conteúdo restrito em celulares de membros não autorizados</li>
+</ul>
+<h2>Checklist para Receber Pesquisador</h2>
+<ul class="checklist">
+<li>ANTES: Pesquisador apresentou proposta por escrito</li>
+<li>ANTES: Grupo responsável analisou e CGD aprovou</li>
+<li>ANTES: Termo para Pesquisadores foi assinado</li>
+<li>DURANTE: Pesquisador acompanhado por membro do terreiro</li>
+<li>DURANTE: Nenhum conteúdo restrito/sagrado foi acessado</li>
+<li>APÓS: Pesquisador enviou texto para revisão</li>
+<li>APÓS: Terreiro recebeu cópia do material produzido</li>
+</ul>
+<h2>Checklist para Redes Sociais</h2>
+<ul class="checklist">
+<li>A liderança aprovou o que vai ser publicado</li>
+<li>Todas as pessoas nas fotos autorizaram o uso da imagem</li>
+<li>Não há conteúdo sagrado ou iniciático visível</li>
+<li>A localização exata do terreiro não está exposta</li>
+<li>Crianças aparecem com autorização dos responsáveis</li>
+<li>O conteúdo representa o terreiro de forma digna e respeitosa</li>
+</ul>
+<div class="download-bar">
+<div class="dl-icon"></div>
+<div class="dl-text"><strong>Baixar todos os documentos completos</strong><span>Versão 1.0 · 2025 · CC BY-NC-SA 4.0</span></div>
+<a class="dl-btn" href="Guia_Pratico_Protecao_Terreiro_v1.docx" download>Guia (.docx)</a>
+<a class="dl-btn" href="Protocolo_Candomble_Dados_v1.docx" download>Protocolo (.docx)</a>
+</div>
+</div>
+</div><!-- /modelos -->
+<!-- SOBRE -->
+<div class="doc-page" id="page-sobre">
+<div class="page-header">
+<div class="ph-tag g">Sobre o projeto</div>
+<h1>Sobre o Data Primers · Terreiro</h1>
+</div>
+<div class="content-wrap">
+<p><strong>Data Primers · Terreiro</strong> é um conjunto de documentos fundacionais — protocolos, guias e modelos operacionais — desenvolvidos para apoiar comunidades de terreiro na proteção, curadoria e governança soberana de seus dados e conhecimentos tradicionais. O nome <em>primer</em> evoca tanto o sentido técnico de documento fundacional quanto o sentido iniciático de primeiro passo: uma base sólida para que cada terreiro possa exercer plena soberania sobre seus saberes.</p>
+<p>O trabalho articula marcos internacionais de proteção de conhecimento tradicional, experiências de soberania de dados de comunidades tradicionais ao redor do mundo, e o contexto jurídico, cultural e político brasileiro.</p>
+<h2>Documentos que baseiam este trabalho</h2>
+<ul>
+<li>CARE Principles for Indigenous Data Governance: GIDA, 2019</li>
+<li>Local Contexts TK Labels and BC Labels</li>
+<li>OCAP®: First Nations Information Governance Centre, Canadá</li>
+<li>Ngā Tikanga Paiherea: Te Mana Raraunga, Nova Zelândia</li>
+<li>Karuk Tribe Intellectual Property Rights Protocol</li>
+<li>Traditional Knowledge Digital Library (TKDL): Índia</li>
+<li>Declaração das Nações Unidas sobre os Direitos dos Povos Indígenas, 2007</li>
+<li>Data Stewardship para Dados do Candomblé: Policy Brief (documento-base)</li>
+<li>Soberania e Governança de Dados de Povos Indígenas em Tempos de IA Generativa: Carrasco, Torino et al., 2025</li>
+</ul>
+<h2>Licença</h2>
+<p>Os documentos deste portal estão disponíveis sob Licença Creative Commons <strong>CC BY-NC-SA 4.0</strong>: Atribuição, Não Comercial, Compartilha Igual.</p>
+<p>Adaptações para diferentes contextos e nações do Candomblé são bem-vindas, desde que os créditos sejam mantidos e as adaptações sejam compartilhadas nas mesmas condições.</p>
+<div class="box verde"><div class="box-title">Axé</div><p>Que este trabalho sirva às comunidades, às ancestrais e às gerações que virão.</p></div>
+</div>
+</div>
+</main><!-- /main -->
+</div><!-- /layout -->
+<script>
+// Page navigation
+function showPage(id) {
+ document.querySelectorAll('.doc-page').forEach(p => p.classList.remove('active'));
+ document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+ const page = document.getElementById('page-' + id);
+ if (page) { page.classList.add('active'); page.scrollTop = 0; }
+ const nav = document.getElementById('nav-' + id);
+ if (nav) nav.classList.add('active');
+ const labels = { home:'Página inicial', guia:'Guia Prático', proto:'Protocolo', modelos:'Modelos', sobre:'Sobre' };
+ const bc = document.getElementById('bc-current');
+ if (bc) bc.textContent = labels[id] || '';
+ window.scrollTo(0,0);
+ if (window.innerWidth <= 900) document.getElementById('sidebar').classList.remove('open');
+}
+
+function scrollTo(id) {
+ setTimeout(() => {
+ const el = document.getElementById(id);
+ if (el) { const top = el.getBoundingClientRect().top + window.pageYOffset - 70; window.scrollTo({ top, behavior:'smooth' }); }
+ }, 80);
+}
+
+function toggleSidebar() {
+ document.getElementById('sidebar').classList.toggle('open');
+}
+
+function filterNav(q) {
+ const items = document.querySelectorAll('.nav-item, .nav-sub');
+ const lq = q.toLowerCase();
+ items.forEach(item => {
+ if (!lq) { item.style.display = ''; return; }
+ item.style.display = item.textContent.toLowerCase().includes(lq) ? '' : 'none';
+ });
+}
+
+// Highlight active section on scroll
+window.addEventListener('scroll', () => {
+ const headings = document.querySelectorAll('.doc-page.active h1[id], .doc-page.active h2[id]');
+ let current = '';
+ headings.forEach(h => { if (h.getBoundingClientRect().top <= 80) current = h.id; });
+});
+
+// Make sidebar nav links functional
+document.querySelectorAll('.nav-sub, .nav-item').forEach(link => {
+ if (link.getAttribute('onclick')) return;
+ link.style.cursor = 'default';
+});
+
+// Init
+showPage('home');
+</script>
+
+<footer id="site-footer">
+  <p>
+    <span class="footer-brand">Data Primers &middot; Terreiro &nbsp;&mdash;&nbsp; &copy; 2026 Ma&iacute;ra Lima &middot; Governan&ccedil;a de Dados &middot; Bras&iacute;lia, DF &ndash; Toolkit Aurora &ndash; Todos os direitos reservados</span>
+  </p>
+  <p class="footer-sub">Baseado no Framework Aurora/DAPI</p>
+</footer>
+
+</body>
+</html>
